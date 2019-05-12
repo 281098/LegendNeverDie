@@ -1,0 +1,75 @@
+﻿@model LND.Web.Models.LoginViewModel
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/layouts.cshtml";
+}
+
+
+<!-- Modal1 -->
+<!-- Modal content-->
+<div class="modal-content"style="padding-left:200px;padding-right:200px;">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+    </div>
+    <div class="modal-body modal-body-sub_agile">
+        <div class="col-md-8 modal_body_left modal_body_left1">
+            <h3 class="agileinfo_sign">Đăng nhập</h3>
+            @using (Html.BeginForm("Login", "Account", new { returnUrl = @ViewBag.ReturnUrl }, FormMethod.Post))
+            {
+                @Html.AntiForgeryToken();
+                @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+                <div class="styled-input agile-styled-input-top">
+                    @Html.TextBoxFor(model => model.UserName)
+                    <label>Tài khoản</label>
+                    <span></span>
+                </div>
+                <div class="styled-input">
+                    @Html.TextBoxFor(model => model.Password)
+                    <label>Mật khẩu</label>
+                    <span></span>
+                </div>
+                <div style="padding-left:5px;">
+                    @Html.CheckBoxFor(model => model.Rememberme)
+                    <label>Nhớ mật khẩu</label>
+                    <span></span>
+                </div>
+                <br />
+                <input type="submit" value="Đăng nhập">
+            }
+            <ul class="social-nav model-3d-0 footer-social w3_agile_social top_agile_third">
+                <li>
+                    <a href="#" class="facebook">
+                        <div class="front"><i class="fa fa-facebook" aria-hidden="true"></i></div>
+                        <div class="back"><i class="fa fa-facebook" aria-hidden="true"></i></div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="twitter">
+                        <div class="front"><i class="fa fa-twitter" aria-hidden="true"></i></div>
+                        <div class="back"><i class="fa fa-twitter" aria-hidden="true"></i></div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="instagram">
+                        <div class="front"><i class="fa fa-instagram" aria-hidden="true"></i></div>
+                        <div class="back"><i class="fa fa-instagram" aria-hidden="true"></i></div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="pinterest">
+                        <div class="front"><i class="fa fa-linkedin" aria-hidden="true"></i></div>
+                        <div class="back"><i class="fa fa-linkedin" aria-hidden="true"></i></div>
+                    </a>
+                </li>
+            </ul>
+            <div class="clearfix"></div>
+            <p><a href="#" data-toggle="modal" data-target="#myModal2"> Chưa có tài khoản ?</a></p>
+
+     </div>
+     </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+<!-- //Modal content-->
+<!-- //Modal1 -->
