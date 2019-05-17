@@ -1,0 +1,255 @@
+﻿@model IEnumerable<LND.Web.Models.ProductViewModel>
+@{
+    ViewBag.Title = "Legend Never Die - Website for đồ án 1";
+    Layout = "~/Views/Shared/layouts.cshtml";
+}
+@{Html.RenderAction("HomeSlide", "Home"); }
+<div class="sale-w3ls-h2t-top" style="padding-bottom:0px!important;"></div>
+
+<div class="new_arrivals_agile_w3ls_info" style="padding-top:10px !important;">
+    <div class="container">
+        <div id="horizontalTab">
+            <ul class="resp-tabs-list">
+                <li> Thời trang nam</li>
+                <li> Thời trang nữ</li>
+                <li> Túi xách</li>
+                <li> Giày </li>
+            </ul>
+            <div class="resp-tabs-container">
+                <!--/tab_one-->
+                <div class="tab1">
+                    @foreach (var product in Model.Take(20))
+                    {
+                        var url = "/" + product.Alias + "-p-" + product.ID + "-html";
+                        var pricePromotion = product.Price * (1 - product.PromotionPrice / 100);
+
+                        <div class="col-md-3 product-men">
+                            <div class="men-pro-item simpleCart_shelfItem">
+
+                                <div class="men-thumb-item">
+                                    <img src="@product.Image" alt="" class="pro-image-front">
+                                    <img src="@product.Image" alt="" class="pro-image-back">
+                                    <div class="men-cart-pro">
+                                        <div class="inner-men-cart-pro">
+                                            <a href="@url" class="link-product-add-cart">Xem ngay</a>
+                                        </div>
+                                    </div>
+                                    <span class="product-new-top">New</span>
+                                </div>
+                                <div class="item-info-product ">
+                                    <h4><a href="@url">@product.Name</a></h4>
+                                    <div class="info-product-price">
+
+                                        @if (product.PromotionPrice.HasValue)
+                                        {
+                                            <span class="item_price">@pricePromotion.Value.ToString("N0")đ</span> <br />
+                                            <del>@product.Price.ToString("N0")đ</del>
+                                        }
+                                        else
+                                        {
+                                            <br />
+                                            <span class="item_price">@product.Price.ToString("N0")đ</span>
+                                        }
+                                    </div>
+                                    <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
+                                        <input type="submit" data-id="@product.ID"  value="Thêm vào giỏ hàng" class="button btnAddToCart" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    <div class="clearfix"></div>
+                </div>
+                <!--//tab_one-->
+                <!--/tab_two-->
+                <div class="tab2">
+                    <div class="col-md-3 product-men">
+                        <div class="men-pro-item simpleCart_shelfItem">
+                            <div class="men-thumb-item">
+                                <img src="/Assets/client/images/w1.jpg" alt="" class="pro-image-front">
+                                <img src="/Assets/client/images/w1.jpg" alt="" class="pro-image-back">
+                                <div class="men-cart-pro">
+                                    <div class="inner-men-cart-pro">
+                                        <a href="single.html" class="link-product-add-cart">Quick View</a>
+                                    </div>
+                                </div>
+                                <span class="product-new-top">New</span>
+                            </div>
+                            <div class="item-info-product ">
+                                <h4><a href="single.html">A-line Black Skirt</a></h4>
+                                <div class="info-product-price">
+                                    <span class="item_price">$130.99</span>
+                                    <del>$189.71</del>
+                                </div>
+                                <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
+                                    <input type="submit" name="submit" value="Thêm vào giỏ hàng" class="button" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <!--//tab_two-->
+                <div class="tab3">
+                    <div class="col-md-3 product-men">
+                        <div class="men-pro-item simpleCart_shelfItem">
+                            <div class="men-thumb-item">
+                                <img src="/Assets/client/images/b1.jpg" alt="" class="pro-image-front">
+                                <img src="/Assets/client/images/b1.jpg" alt="" class="pro-image-back">
+                                <div class="men-cart-pro">
+                                    <div class="inner-men-cart-pro">
+                                        <a href="single.html" class="link-product-add-cart">Quick View</a>
+                                    </div>
+                                </div>
+                                <span class="product-new-top">New</span>
+                            </div>
+                            <div class="item-info-product ">
+                                <h4><a href="single.html">Laptop Messenger Bag</a></h4>
+                                <div class="info-product-price">
+                                    <span class="item_price">$140.99</span>
+                                    <del>$169.71</del>
+                                </div>
+                                <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
+                                    <input type="submit" name="submit" value="Thêm vào giỏ hàng" class="button" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="tab4">
+                    <div class="col-md-3 product-men">
+                        <div class="men-pro-item simpleCart_shelfItem">
+                            <div class="men-thumb-item">
+                                <img src="/Assets/client/images/s1.jpg" alt="" class="pro-image-front">
+                                <img src="/Assets/client/images/s1.jpg" alt="" class="pro-image-back">
+                                <div class="men-cart-pro">
+                                    <div class="inner-men-cart-pro">
+                                        <a href="single.html" class="link-product-add-cart">Quick View</a>
+                                    </div>
+                                </div>
+                                <span class="product-new-top">New</span>
+                            </div>
+                            <div class="item-info-product ">
+                                <h4><a href="single.html">Running Shoes</a></h4>
+                                <div class="info-product-price">
+                                    <span class="item_price">$80.99</span>
+                                    <del>$89.71</del>
+                                </div>
+                                <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
+                                    <input type="submit" name="submit" value="Thêm vào giỏ hàng" class="button" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="sale-w3ls-h2t-center" style="padding:0px !important;"></div>
+<div class="new_arrivals_agile_w3ls_info" style="padding-top:10px !important; background-color:#dbf5f1">
+    <div class="container">
+        <div class="resp-tabs-container">
+            @foreach (var product in Model.Skip(20).Take(16))
+            {
+                var url = "/" + product.Alias + "-p-" + product.ID + "-html";
+                var pricePromotion = product.Price * (1 - product.PromotionPrice / 100);
+
+                <div class="col-md-3 product-men">
+                    <div class="men-pro-item simpleCart_shelfItem">
+
+                        <div class="men-thumb-item">
+                            <img src="@product.Image" alt="" class="pro-image-front">
+                            <img src="@product.Image" alt="" class="pro-image-back">
+                            <div class="men-cart-pro">
+                                <div class="inner-men-cart-pro">
+                                    <a href="@url" class="link-product-add-cart">Xem ngay</a>
+                                </div>
+                            </div>
+                            <span class="product-new-top">New</span>
+                        </div>
+                        <div class="item-info-product ">
+                            <h4><a href="@url">@product.Name</a></h4>
+                            <div class="info-product-price">
+
+                                @if (product.PromotionPrice.HasValue)
+                                {
+                                    <span class="item_price">@pricePromotion.Value.ToString("N0")đ</span> <br />
+                                    <del>@product.Price.ToString("N0")đ</del>
+                                }
+                                else
+                                {
+                                    <br />
+                                    <span class="item_price">@product.Price.ToString("N0")đ</span>
+                                }
+                            </div>
+                            <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
+                                <input type="submit" data-id="@product.ID" value="Thêm vào giỏ hàng" class="button btnAddToCart" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+<!--/New prosucts-->
+<div class="sale-w3ls-h2t-bot" style="padding:0px !important;"></div>
+<div class="new_arrivals_agile_w3ls_info" style="padding-top:10px !important; background-color:#f6f6f6">
+    <div class="container">
+        <div class="resp-tabs-container">
+            @foreach (var product in Model.Skip(53).Take(28))
+            {
+                var url = "/" + product.Alias + "-p-" + product.ID + "-html";
+                var pricePromotion = product.Price * (1 - product.PromotionPrice / 100);
+
+                <div class="col-md-3 product-men">
+                    <div class="men-pro-item simpleCart_shelfItem">
+
+                        <div class="men-thumb-item">
+                            <img src="@product.Image" alt="" class="pro-image-front">
+                            <img src="@product.Image" alt="" class="pro-image-back">
+                            <div class="men-cart-pro">
+                                <div class="inner-men-cart-pro">
+                                    <a href="@url" class="link-product-add-cart">Xem ngay</a>
+                                </div>
+                            </div>
+                            <span class="product-new-top">New</span>
+                        </div>
+                        <div class="item-info-product ">
+                            <h4><a href="@url">@product.Name</a></h4>
+                            <div class="info-product-price">
+
+                                @if (product.PromotionPrice.HasValue)
+                                {
+                                    <span class="item_price">@pricePromotion.Value.ToString("N0")đ</span> <br />
+                                    <del>@product.Price.ToString("N0")đ</del>
+                                }
+                                else
+                                {
+                                    <br />
+                                    <span class="item_price">@product.Price.ToString("N0")đ</span>
+                                }
+                            </div>
+                            <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
+                                <input type="submit" data-id="@product.ID"  value="Thêm vào giỏ hàng" class="button btnAddToCart" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+<!-- /we-offer -->
+<div class="sale-w3ls">
+    <div class="container">
+        <h6>We Offer Flat <span>40%</span> Discount</h6>
+        <a class="hvr-outline-out button2" href="/hang-giam-gia-html">Shop Now </a>
+    </div>
+</div>

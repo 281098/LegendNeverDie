@@ -1,0 +1,88 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/layouts.cshtml";
+}
+<script src="~/Assets/client/js/controllers/cartShopping.js"></script>
+    <div class="h2t_img_Cart_header">
+        <div class="container">
+            <!--/w3_short-->
+            <div class="services-breadcrumb">
+                <div class="agile_inner_breadcrumb">
+                    <ul class="w3_short">
+                        <li><a href="Home/Index">Trang chủ</a><i>/</i></li>
+                        <li>Giỏ hàng</li>
+                    </ul>
+                </div>
+            </div>
+            <!--//w3_short-->
+        </div>
+    </div>
+    <br />
+    <div class="cart_table">
+        <div id="cartContent">
+            <h3 style="text-shadow: 2px 2px #ff0000;">Giỏ hàng</h3>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Tên sản phẩm</th>
+                        <th>Hình ảnh</th>
+                        <th>Giá</th>
+                        <th>Số lượng</th>
+                        <th>Thành tiền</th>
+                        <th>#</th>
+                    </tr>
+                </thead>
+                <tbody id="cartBody"></tbody>
+            </table>
+            <div class="pull-right">
+                <b> Tổng tiền: <span id="lblTotalOrder"></span></b>
+            </div>
+            <div class="clearfix"> </div>
+            <br />
+            <div class="pull-right">
+                <buton class="btn btn-primary" id="btnContinue">Tiếp tục mua </buton>
+                <button class="btn btn-danger" id="btnDeleteAll">Xóa tất cả</button>
+                <button class="btn btn-success" id="btnCheckout">Thanh toán</button>
+            </div>            
+        </div>
+    </div>
+    <br />
+    <div class="cart_table" id="divCheckout" style="display:none;">
+        <h3>Thông tin liên hệ</h3>
+        <br />
+        <div class="contact-form-cart">
+            <form method="post" id="frmPayment">
+                @if (Request.IsAuthenticated)
+                {                          
+                <label style="padding-bottom:10px;">
+                    <input type="checkbox" id="chkUserLoginInfo" />
+                    Sử dụng thông tin đăng nhập
+                </label>    
+                  
+                }
+                <input type="text" class="textbox" id="txtName" name="name" placeholder="Họ tên"><br />
+                <input type="text" class="textbox" id="txtAddress" name="address" placeholder="Địa chỉ"><br />
+                <input type="text" class="textbox" id="txtEmail" name="email" placeholder="Email"><br />
+                <input type="text" class="textbox" id="txtPhone" name="phone" placeholder="Điện thoại"><br />
+                <textarea value="" id="txtMessage" placeholder="ghi chú"></textarea><br />
+                <input type="button" value="Hủy" class="btn btn-danger">
+                <input type="button" id="btnCreateOrder" value="Đặt hàng" class="btn btn-success" style="margin-left: 83%;">
+                <div class="clearfix"> </div>
+            </form>
+
+        </div>
+    </div>
+    <script id="tplCart" type="x-tmpl-mustache">
+        <tr>
+            <td>{{ProductId}}</td>
+            <td>{{ProductName}}</td>
+            <td><img src="{{Image}}" height="50" /></td>
+            <td>{{PriceF}}</td>
+            <td><input type="number" data-id="{{ProductId}}" data-price="{{Price}}" value="{{Quantity}}" class="input txtQuantity" /></td>
+            <td id="amount_{{ProductId}}">{{Amount}}</td>
+            <td><button class="btn btn-danger btnDeleteItem" data-id="{{ProductId}}"><i class="fa fa-close"></i></button></td>
+        </tr>
+
+    </script>
