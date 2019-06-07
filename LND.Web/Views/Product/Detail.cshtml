@@ -12,7 +12,7 @@
         <div class="services-breadcrumb">
             <div class="agile_inner_breadcrumb">
                 <ul class="w3_short">
-                    <li><a href="Home/Index">Trang chủ</a><i>/</i></li>
+                    <li><a href="/">Trang chủ</a><i>/</i></li>
                     <li>Chi tiết sản phẩm </li>
                 </ul>
             </div>
@@ -53,6 +53,17 @@
             {
                 <p><span class="item_price">@Model.Price</span> </p>
             }
+            <div>
+                @if (Model.Quantity == 0)
+                {
+                    <small><strong>Sản phẩm hết hàng.</strong></small>
+                }
+                else
+                {
+                    <small>Số lượng hàng còn trong kho:<strong>@Model.Quantity</strong> </small>
+                }
+
+            </div>
             <div class="rating1">
                 <span class="starRating">
                     <input id="rating5" type="radio" name="rating" value="5">
@@ -74,17 +85,21 @@
                     <input type="submit" value="Check">
                 </form>
             </div>
-            <div class="occasion-cart">
-                <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-                    <input type="submit" data-id="@Model.ID"  value="Thêm vào giỏ hàng" class="button btnAddToCart" />
+            @if (Model.Quantity != 0)
+            {
+                <div class="occasion-cart">
+                    <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
+                        <input type="submit" data-id="@Model.ID" value="Thêm vào giỏ hàng" class="button btnAddToCart" />
+                    </div>
                 </div>
-            </div>
+            }
+
             @if (Model.Warranty != null)
             {
-                <div>Thời gian bảo hành: @Model.Warranty tháng.</div>
+                <small>Thời gian bảo hành: @Model.Warranty tháng.</small>
             }
-            @{ 
-                var Tags= (IEnumerable<LND.Web.Models.TagViewModel>)ViewBag.Tags;
+            @{
+                var Tags = (IEnumerable<LND.Web.Models.TagViewModel>)ViewBag.Tags;
             }
             <div class="tag">
                 <h5>Tag :</h5>
@@ -93,7 +108,6 @@
                     {
                         <li><a href="/tag-@(tag.ID)-html">@(tag.Name) , </a></li>
                     }
-
                 </ul>
             </div>
             <div class="clearfix"></div>
@@ -149,7 +163,7 @@
                             <div class="bootstrap-tab-text-grids">
                                 <div class="bootstrap-tab-text-grid">
                                     <div class="bootstrap-tab-text-grid-left">
-                                        <img src="~/Assets/client/images/t1.jpg" alt=" " class="img-responsive">
+                                        <img src="~/Assets/client/images/ab_pic.jpg" alt=" " class="img-responsive">
                                     </div>
                                     <div class="bootstrap-tab-text-grid-right">
                                         <ul>
@@ -229,7 +243,15 @@
                         }
                     </div>
                     <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-                        <input type="submit" data-id="@product.ID"  value="Thêm vào giỏ hàng" class="button btnAddToCart" />
+                        @if (product.Quantity == 0)
+                        {
+                            <input type="submit" data-id="@product.ID" value="Sản phẩm hết hàng" class="button " />
+                        }
+                        else
+                        {
+                            <input type="submit" data-id="@product.ID" value="Thêm vào giỏ hàng" class="button btnAddToCart" />
+                        }
+
                     </div>
                 </div>
             </div>

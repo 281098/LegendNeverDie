@@ -13,13 +13,13 @@ namespace LND.Web.Controllers
 {
     public class ProductController : Controller
     {
-         IProductService _productService;
-        IProductCategoryService _productCategoryService;
-        public ProductController(IProductService productService,IProductCategoryService productCategoryService)
+        private IProductService _productService;
+        private IProductCategoryService _productCategoryService;
+
+        public ProductController(IProductService productService, IProductCategoryService productCategoryService)
         {
             this._productService = productService;
             this._productCategoryService = productCategoryService;
-
         }
 
         // GET: Product
@@ -35,11 +35,11 @@ namespace LND.Web.Controllers
             return View(viewModel);
         }
 
-        public ActionResult Category(int id,int page =1)
+        public ActionResult Category(int id, int page = 1)
         {
             int pageSize = 12;
             int totalRow = 0;
-            var productModel = _productService.GetListProductByCategoryIdPaging(id,page, pageSize, out totalRow);
+            var productModel = _productService.GetListProductByCategoryIdPaging(id, page, pageSize, out totalRow);
             var productViewModel = Mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(productModel);
             int totalPage = (int)Math.Ceiling((double)totalRow / pageSize);
 
@@ -50,13 +50,14 @@ namespace LND.Web.Controllers
                 Items = productViewModel,
                 MaxPage = 5,
                 Page = page,
-               
+
                 TotalCount = totalRow,
                 TotalPages = totalPage
             };
 
             return View(paginationSet);
         }
+
         public ActionResult ListByTag(string id, int page = 1)
         {
             int pageSize = 12;
@@ -77,13 +78,20 @@ namespace LND.Web.Controllers
 
             return View(paginationSet);
         }
+
         public ActionResult Search(string keyword)
         {
-            ViewBag.Keyword = keyword;
-            var model = _productService.Search(keyword);
-            IEnumerable<ProductViewModel> listProductViewModel = Mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(model);
-            return View(listProductViewModel);
+            if (!string.IsNullOrEmpty(keyword))
+            {
+                ViewBag.Keyword = keyword;
+                var model = _productService.Search(keyword);
+                IEnumerable<ProductViewModel> listProductViewModel = Mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(model);
+                return View(listProductViewModel);
+            }
+            else
+                return View();
         }
+
         public ActionResult Sale()
         {
             var model = _productService.GetAll();

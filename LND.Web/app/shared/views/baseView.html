@@ -78,7 +78,7 @@
                         <ul class="dropdown-menu">
                             <!-- User image -->
                             <li class="user-header">
-                                <img src="./Assets/admin/img/women.jpg" class="img-circle" alt="User Image">
+                                <img src="/Assets/admin/img/women.jpg" class="img-circle" alt="User Image">
                                 <p>
                                     {{authentication.userName}}
                                 </p>
@@ -156,7 +156,17 @@
                     <ul class="treeview-menu">
                         <li><a ui-sref="product_categories"><i class="fa fa-circle-o"></i> Danh mục sản phẩm</a></li>
                         <li><a ui-sref="products"><i class="fa fa-circle-o"></i> Sản phẩm</a></li>
+
                     </ul>
+
+                </li>
+                <li class="treeview">
+                    <a ui-sref="post_categories">
+                        <i class="fa fa-files-o"></i>
+                        <span>Bài viết</span>
+                        <span class="label label-primary pull-right">4</span>
+                    </a>
+                  
                 </li>
             </ul>
         </section>
@@ -167,8 +177,7 @@
     <div class="content-wrapper">
         <div ui-view></div>
     </div><!-- /.content-wrapper -->
-    <footer class="main-footer">
-    </footer>
+    <footer class="main-footer"></footer>
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">
         <!-- Create the tabs -->

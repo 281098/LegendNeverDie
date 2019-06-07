@@ -1,7 +1,6 @@
 ﻿(function (app) {
     app.controller('loginController', ['$scope', 'loginService', '$injector', 'notificationService',
         function ($scope, loginService, $injector, notificationService) {
-
             $scope.loginData = {
                 userName: "",
                 password: ""
@@ -15,6 +14,7 @@
                     else {
                         var stateService = $injector.get('$state');
                         stateService.go('home');
+                        //stateService.go('products');
                     }
                 });
             }

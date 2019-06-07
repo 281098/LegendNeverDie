@@ -8,8 +8,8 @@ namespace LND.Web
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-            // BotDetect requests must not be routed
-            // routes.IgnoreRoute("{*botdetect}", new { botdetect = @"(.*)BotDetectCaptcha\.ashx" });
+            // BotDetect requests must not be routed routes.IgnoreRoute("{*botdetect}", new {
+            // botdetect = @"(.*)BotDetectCaptcha\.ashx" });
             routes.MapRoute(
      name: "Cart",
      url: "gio-hang",
@@ -21,6 +21,14 @@ namespace LND.Web
           name: "Search",
           url: "tim-kiem-html",
           defaults: new { controller = "Product", action = "Search", id = UrlParameter.Optional },
+          namespaces: new string[] { "LND.Web.Controllers" }
+
+      );
+
+            routes.MapRoute(
+          name: "news",
+          url: "bai-viet-html",
+          defaults: new { controller = "Post", action = "Index", id = UrlParameter.Optional },
           namespaces: new string[] { "LND.Web.Controllers" }
 
       );
@@ -52,7 +60,7 @@ namespace LND.Web
       );
             routes.MapRoute(
         name: "About",
-        url: "about",
+        url: "gioi-thieu-html",
         defaults: new { controller = "About", action = "About", id = UrlParameter.Optional },
         namespaces: new string[] { "LND.Web.Controllers" }
     );

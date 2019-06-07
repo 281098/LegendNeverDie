@@ -14,7 +14,6 @@
             var productid = parseInt($(this).data('id'));
             var price = parseFloat($(this).data('price'));
             if (isNaN(quantity) == false) {
-
                 var amount = quantity * price;
 
                 $('#amount_' + productid).text(numeral(amount).format('0,0'));
@@ -25,9 +24,7 @@
 
             $('#lblTotalOrder').text(numeral(cart.getTotalOrder()).format('0,0'));
 
-
             cart.updateAll();
-
         });
         $('#btnContinue').off('click').on('click', function (e) {
             e.preventDefault();
@@ -52,10 +49,13 @@
             }
         });
         $('#btnCreateOrder').off('click').on('click', function (e) {
-            e.preventDefault();          
+            e.preventDefault();
             cart.createOrder();
         });
-
+        $('#btnCancel').off('click').on('click', function (e) {
+            e.preventDefault();
+            $('#divCheckout').hide();
+        });
     },
     getLoginUser: function () {
         $.ajax({
@@ -84,25 +84,33 @@
             PaymentMethod: "Thanh toán tiền mặt",
             Status: false
         }
-        $.ajax({
-            url: '/ShoppingCart/CreateOrder',
-            type: 'POST',
-            dataType: 'json',
-            data: {
-                orderViewModel: JSON.stringify(order)
-            },
-            success: function (response) {
-                if (response.status) {
-                    console.log('create order ok');
-                    $('#divCheckout').hide();
-                    cart.deleteAll();
-                    setTimeout(function () {
-                        $('#cartContent').html('Cảm ơn bạn đã đặt hàng . Chúng tôi sẽ liên hệ sớm nhất.');
-                    }, 1000);
-
+        if (order.CustomerName != "" && order.CustomerAddress != "") {
+            $.ajax({
+                url: '/ShoppingCart/CreateOrder',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    orderViewModel: JSON.stringify(order)
+                },
+                success: function (response) {
+                    if (response.status) {
+                        console.log('create order ok');
+                        $('#divCheckout').hide();
+                        cart.deleteAll();
+                        alert('Bạn đã đặt hàng thành công');
+                        setTimeout(function () {
+                            $('#cartContent').html('Cảm ơn bạn đã đặt hàng . Chúng tôi sẽ liên hệ sớm nhất.');
+                        }, 1000);
+                    }
                 }
-            }
-        });
+            });
+        }
+        else {
+            $('#btnCreateOrder').off('click').on('click', function (e) {
+                e.preventDefault();
+                alert('Bạn phải điền đầy đủ thông tin')
+            });
+        }
     },
     getTotalOrder: function () {
         var listTextBox = $('.txtQuantity');
@@ -172,6 +180,7 @@
                     var template = $('#tplCart').html();
                     var html = '';
                     var data = res.data;
+                    var countItem = 0;
                     $.each(data, function (_i, item) {
                         html += Mustache.render(template, {
                             ProductId: item.ProductId,
@@ -182,6 +191,7 @@
                             Quantity: item.Quantity,
                             Amount: numeral(item.Quantity * item.Product.Price).format('0,0')
                         });
+                        countItem += 1;
                     });
 
                     $('#cartBody').html(html);
@@ -189,7 +199,9 @@
                     if (html == '') {
                         $('#cartContent').css("text-align", "center");
                         $('#cartContent').html('Không có sản phẩm nào trong giỏ hàng.');
+                        $('#countItem').html('0');
                     }
+                    $('#countItem').html(countItem);
                     $('#lblTotalOrder').text(numeral(cart.getTotalOrder()).format('0,0'));
                     cart.registerEvent();
                 }

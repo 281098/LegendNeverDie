@@ -24,6 +24,7 @@
                 }
             });
         });
+        $('#countItem').html('0');
     }
 }
 common.init();

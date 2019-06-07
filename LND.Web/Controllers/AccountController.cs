@@ -53,6 +53,7 @@ namespace LND.Web.Controllers
         public AccountController()
         {
         }
+
         [HttpGet]
         public ActionResult Register()
         {
@@ -83,7 +84,6 @@ namespace LND.Web.Controllers
                     Email = model.Email,
                     EmailConfirmed = true,
                     BirthDay = DateTime.Now,
-
                 };
 
                 await _userManager.CreateAsync(user, model.Password);
@@ -94,7 +94,7 @@ namespace LND.Web.Controllers
 
                 string content = System.IO.File.ReadAllText(Server.MapPath("/Assets/client/mail/register.html"));
                 content = content.Replace("{{UserName}}", adminUser.FullName);
-                content = content.Replace("{{Link}}", "http://localhost:49973/dang-nhap-html");
+                content = content.Replace("{{Link}}", "http://localhost:49972/dang-nhap-html");
 
                 MailHelper.SendMail(adminUser.Email, "Đăng ký thành công", content);
 
@@ -103,16 +103,17 @@ namespace LND.Web.Controllers
 
             return View();
         }
+
         // GET: Account
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
-            //  return RedirectToAction("Index", "Home");
+            //return RedirectToAction("Index", "Home");
             return View();
         }
 
         [HttpPost]
-        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
+        public ActionResult Login(LoginViewModel model, string returnUrl)
         {
             if (ModelState.IsValid)
             {
@@ -140,7 +141,6 @@ namespace LND.Web.Controllers
                 }
             }
             return View(model);
-
         }
 
         [HttpPost]

@@ -3,10 +3,11 @@
     ViewBag.Title = "Legend Never Die - Website for đồ án 1";
     Layout = "~/Views/Shared/layouts.cshtml";
 }
-@{Html.RenderAction("HomeSlide", "Home"); }
-<div class="sale-w3ls-h2t-top" style="padding-bottom:0px!important;"></div>
 
-<div class="new_arrivals_agile_w3ls_info" style="padding-top:10px !important;">
+@{Html.RenderAction("HomeSlide", "Home"); }
+
+<div class="sale-w3ls-h2t-top" style="padding-bottom: 0px !important;"></div>
+<div class="new_arrivals_agile_w3ls_info" style="padding-top: 10px !important;">
     <div class="container">
         <div id="horizontalTab">
             <ul class="resp-tabs-list">
@@ -18,17 +19,22 @@
             <div class="resp-tabs-container">
                 <!--/tab_one-->
                 <div class="tab1">
+                    @{int i = 1; }
                     @foreach (var product in Model.Take(20))
                     {
+
+                        var id = "animation" + i;
+                        i++;
                         var url = "/" + product.Alias + "-p-" + product.ID + "-html";
                         var pricePromotion = product.Price * (1 - product.PromotionPrice / 100);
 
-                        <div class="col-md-3 product-men">
+                        <div class="col-md-3 product-men" id=@id style="        opacity: 0">
                             <div class="men-pro-item simpleCart_shelfItem">
 
                                 <div class="men-thumb-item">
                                     <img src="@product.Image" alt="" class="pro-image-front">
                                     <img src="@product.Image" alt="" class="pro-image-back">
+                                    
                                     <div class="men-cart-pro">
                                         <div class="inner-men-cart-pro">
                                             <a href="@url" class="link-product-add-cart">Xem ngay</a>
@@ -51,12 +57,23 @@
                                             <span class="item_price">@product.Price.ToString("N0")đ</span>
                                         }
                                     </div>
-                                    <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-                                        <input type="submit" data-id="@product.ID"  value="Thêm vào giỏ hàng" class="button btnAddToCart" />
-                                    </div>
+                                    @if (product.Quantity == 0)
+                                    {
+                                        <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
+                                            <input type="submit" data-id="@product.ID" value="Hết hàng" class="button" />
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
+                                            <input type="submit" data-id="@product.ID" value="Thêm vào giỏ hàng" class="button btnAddToCart" />
+                                        </div>
+                                    }
+
                                 </div>
                             </div>
                         </div>
+
                     }
                     <div class="clearfix"></div>
                 </div>
@@ -146,19 +163,20 @@
                 </div>
             </div>
         </div>
-
     </div>
 </div>
-<div class="sale-w3ls-h2t-center" style="padding:0px !important;"></div>
-<div class="new_arrivals_agile_w3ls_info" style="padding-top:10px !important; background-color:#dbf5f1">
+<div class="sale-w3ls-h2t-center" style=" padding: 0px !important;"></div>
+<div class="new_arrivals_agile_w3ls_info" style="padding-top: 10px !important;">
     <div class="container">
         <div class="resp-tabs-container">
             @foreach (var product in Model.Skip(20).Take(16))
             {
+                var id = "animation" + i;
+                i++;
                 var url = "/" + product.Alias + "-p-" + product.ID + "-html";
                 var pricePromotion = product.Price * (1 - product.PromotionPrice / 100);
 
-                <div class="col-md-3 product-men">
+                <div class="col-md-3 product-men" id=@id style="        opacity: 0">
                     <div class="men-pro-item simpleCart_shelfItem">
 
                         <div class="men-thumb-item">
@@ -186,9 +204,18 @@
                                     <span class="item_price">@product.Price.ToString("N0")đ</span>
                                 }
                             </div>
-                            <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-                                <input type="submit" data-id="@product.ID" value="Thêm vào giỏ hàng" class="button btnAddToCart" />
-                            </div>
+                            @if (product.Quantity == 0)
+                            {
+                                <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
+                                    <input type="submit" data-id="@product.ID" value="Hết hàng" class="button" />
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
+                                    <input type="submit" data-id="@product.ID" value="Thêm vào giỏ hàng" class="button btnAddToCart" />
+                                </div>
+                            }
                         </div>
                     </div>
                 </div>
@@ -198,16 +225,18 @@
     <div class="clearfix"></div>
 </div>
 <!--/New prosucts-->
-<div class="sale-w3ls-h2t-bot" style="padding:0px !important;"></div>
-<div class="new_arrivals_agile_w3ls_info" style="padding-top:10px !important; background-color:#f6f6f6">
+<div class="sale-w3ls-h2t-bot" style="padding: 0px !important;"></div>
+<div class="new_arrivals_agile_w3ls_info" style="padding-top: 10px !important">
     <div class="container">
-        <div class="resp-tabs-container">
+        <div class="resp-tabs-container" ">
             @foreach (var product in Model.Skip(53).Take(28))
             {
+                var id = "animation" + i;
+                i++;
                 var url = "/" + product.Alias + "-p-" + product.ID + "-html";
                 var pricePromotion = product.Price * (1 - product.PromotionPrice / 100);
 
-                <div class="col-md-3 product-men">
+                <div class="col-md-3 product-men" id=@id style="opacity: 1">
                     <div class="men-pro-item simpleCart_shelfItem">
 
                         <div class="men-thumb-item">
@@ -235,9 +264,18 @@
                                     <span class="item_price">@product.Price.ToString("N0")đ</span>
                                 }
                             </div>
-                            <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-                                <input type="submit" data-id="@product.ID"  value="Thêm vào giỏ hàng" class="button btnAddToCart" />
-                            </div>
+                            @if (product.Quantity == 0)
+                            {
+                                <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
+                                    <input type="submit" data-id="@product.ID" value="Hết hàng" class="button" />
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
+                                    <input type="submit" data-id="@product.ID" value="Thêm vào giỏ hàng" class="button btnAddToCart" />
+                                </div>
+                            }
                         </div>
                     </div>
                 </div>

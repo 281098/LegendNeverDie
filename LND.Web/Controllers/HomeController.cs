@@ -18,7 +18,8 @@ namespace LND.Web.Controllers
             this._productService = productService;
             this._productCategoryService = productCategoryService;
         }
-        [OutputCache(Duration = 3600, Location = System.Web.UI.OutputCacheLocation.Client)]
+
+        // [OutputCache(Duration = 3600, Location = System.Web.UI.OutputCacheLocation.Client)]
         public ActionResult Index()
         {
             var model = _productService.GetAll();
@@ -27,7 +28,7 @@ namespace LND.Web.Controllers
         }
 
         [ChildActionOnly]
-       //[OutputCache(Duration = 3600)]
+        // [OutputCache(Duration = 3600, Location = System.Web.UI.OutputCacheLocation.Client)]
         public ActionResult Header()
         {
             var model = _productCategoryService.GetAll();
@@ -36,7 +37,7 @@ namespace LND.Web.Controllers
         }
 
         [ChildActionOnly]
-       [OutputCache(Duration = 3600)]
+        [OutputCache(Duration = 3600)]
         public ActionResult Footer()
         {
             return PartialView();

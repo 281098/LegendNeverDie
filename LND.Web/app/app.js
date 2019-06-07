@@ -2,8 +2,9 @@
 
 (function () {
     angular.module('legendneverdie',
-        ['LND.products',
+        [   'LND.products',
             'LND.product_categories',
+            'LND.post_categories',
             'LND.common'])
         .config(config)
         .config(configAuthentication);
@@ -34,11 +35,9 @@
         $httpProvider.interceptors.push(function ($q, $location) {
             return {
                 request: function (config) {
-
                     return config;
                 },
                 requestError: function (rejection) {
-
                     return $q.reject(rejection);
                 },
                 response: function (response) {
@@ -49,7 +48,6 @@
                     return response;
                 },
                 responseError: function (rejection) {
-
                     if (rejection.status == "401") {
                         $location.path('/login');
                     }

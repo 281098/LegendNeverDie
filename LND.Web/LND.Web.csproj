@@ -212,6 +212,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PostController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Global.asax.cs">
@@ -244,6 +245,13 @@
     <Content Include="app\components\home\rootController.js" />
     <Content Include="app\components\login\loginController.js" />
     <Content Include="app\components\login\loginView.html" />
+    <Content Include="app\components\post_categories\postCategories.module.js" />
+    <Content Include="app\components\post_categories\postCategoryAddView.html" />
+    <Content Include="app\components\post_categories\postCategoryAddController.js" />
+    <Content Include="app\components\post_categories\postCategoryEditController.js" />
+    <Content Include="app\components\post_categories\postCategoryEditView.html" />
+    <Content Include="app\components\post_categories\postCategoryListView.html" />
+    <Content Include="app\components\post_categories\postCategoryListController.js" />
     <Content Include="app\components\products\products.module.js" />
     <Content Include="app\components\products\productAddController.js" />
     <Content Include="app\components\products\productAddView.html" />
@@ -4107,6 +4115,7 @@
     <Content Include="Assets\admin\libs\toastr\toastr.js" />
     <Content Include="Assets\admin\libs\toastr\toastr.min.css" />
     <Content Include="Assets\admin\libs\toastr\toastr.min.js" />
+    <Content Include="Assets\client\css\animate.css" />
     <Content Include="Assets\client\css\bootstrap.css" />
     <Content Include="Assets\client\css\easy-responsive-tabs.css" />
     <Content Include="Assets\client\css\flexslider.css" />
@@ -4117,7 +4126,6 @@
     <Content Include="Assets\client\css\team.css" />
     <Content Include="Assets\client\fonts\fontawesome-webfont.svg" />
     <Content Include="Assets\client\fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="Assets\client\images\128.png" />
     <Content Include="Assets\client\images\ab_pic.jpg" />
     <Content Include="Assets\client\images\apn-h2t.jpg" />
     <Content Include="Assets\client\images\arrow.png" />
@@ -4127,50 +4135,45 @@
     <Content Include="Assets\client\images\banner3.jpg" />
     <Content Include="Assets\client\images\banner4.jpg" />
     <Content Include="Assets\client\images\banner5.jpg" />
-    <Content Include="Assets\client\images\bb1.jpg" />
-    <Content Include="Assets\client\images\bb2.jpg" />
     <Content Include="Assets\client\images\atn-h2t.png" />
     <Content Include="Assets\client\images\bg-bot-h2t.jpg" />
+    <Content Include="Assets\client\images\bg-categories3.jpg" />
     <Content Include="Assets\client\images\bg-center-ht2.jpg" />
+    <Content Include="Assets\client\images\bg-h2t-slide.jpg" />
+    <Content Include="Assets\client\images\bg-search-submit.png" />
+    <Content Include="Assets\client\images\bg-video.jpg" />
     <Content Include="Assets\client\images\bln-h2t.PNG" />
-    <Content Include="Assets\client\images\bottom1.jpg" />
-    <Content Include="Assets\client\images\bottom2.jpg" />
-    <Content Include="Assets\client\images\bottom3.jpg" />
-    <Content Include="Assets\client\images\bottom4.jpg" />
-    <Content Include="Assets\client\images\bot_1.jpg" />
-    <Content Include="Assets\client\images\bot_2.jpg" />
     <Content Include="Assets\client\images\btn_next.png" />
     <Content Include="Assets\client\images\btn_pause.png" />
     <Content Include="Assets\client\images\btn_play.png" />
     <Content Include="Assets\client\images\btn_prev.png" />
+    <Content Include="Assets\client\images\cart-32-32 .ico" />
+    <Content Include="Assets\client\images\cart.PNG" />
     <Content Include="Assets\client\images\fav.ico" />
     <Content Include="Assets\client\images\gdn-h2t.jpg" />
     <Content Include="Assets\client\images\h2t-bg.png" />
-    <Content Include="Assets\client\images\inner1.jpg" />
-    <Content Include="Assets\client\images\inner2.jpg" />
+    <Content Include="Assets\client\images\home-image.jpg" />
+    <Content Include="Assets\client\images\loader.gif" />
     <Content Include="Assets\client\images\mark1.png" />
     <Content Include="Assets\client\images\mid.jpg" />
     <Content Include="Assets\client\images\s1.jpg" />
     <Content Include="Assets\client\images\search.png" />
+    <Content Include="Assets\client\images\shopping-cart.jpg" />
     <Content Include="Assets\client\images\sm-h2t.jpg" />
-    <Content Include="Assets\client\images\t1.jpg" />
-    <Content Include="Assets\client\images\t2.jpg" />
-    <Content Include="Assets\client\images\t3.jpg" />
-    <Content Include="Assets\client\images\t4.jpg" />
     <Content Include="Assets\client\images\tick-mark1.png" />
     <Content Include="Assets\client\images\tln-h2t.jpg" />
     <Content Include="Assets\client\images\top-bg-h2t.jpg" />
-    <Content Include="Assets\client\images\top1.jpg" />
-    <Content Include="Assets\client\images\top2.jpg" />
     <Content Include="Assets\client\images\up_arrow.png" />
     <Content Include="Assets\client\images\vdn-h2t.jpg" />
     <Content Include="Assets\client\images\w1.jpg" />
     <Content Include="Assets\client\js\bootstrap.js" />
     <Content Include="Assets\client\js\common.js" />
     <Content Include="Assets\client\js\controllers\cartShopping.js" />
-    <Content Include="Assets\client\js\controllers\contact.js" />
+    <Content Include="Assets\client\js\controllers\animation.js" />
+    <Content Include="Assets\client\js\controllers\newsPost.js" />
     <Content Include="Assets\client\js\easy-responsive-tabs.js" />
     <Content Include="Assets\client\js\imagezoom.js" />
+    <Content Include="Assets\client\js\jquery-1.12.3.js" />
     <Content Include="Assets\client\js\jquery-2.1.4.min.js" />
     <Content Include="Assets\client\js\jquery-ui.js" />
     <Content Include="Assets\client\js\jquery.countup.js" />
@@ -4422,9 +4425,10 @@
     <Content Include="Views\Product\ListByTag.cshtml" />
     <Content Include="Views\Contact\Index.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
-    <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\About\About.cshtml" />
     <Content Include="Views\ShoppingCart\Index.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Post\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
@@ -4474,7 +4478,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>49972</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:49973/</IISUrl>
+          <IISUrl>http://localhost:49972/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

@@ -20,15 +20,15 @@ namespace LND.Web.Infrastructure.Extensions
             postCategory.Image = postCategoryVm.Image;
             postCategory.HomeFlag = postCategoryVm.HomeFlag;
 
-            postCategory.CreatedDate = postCategoryVm.CreatedDate;
+            postCategory.CreatedDate = DateTime.Now;
             postCategory.CreatedBy = postCategoryVm.CreatedBy;
             postCategory.UpdatedDate = postCategoryVm.UpdatedDate;
             postCategory.UpdatedBy = postCategoryVm.UpdatedBy;
             postCategory.MetaKeyword = postCategoryVm.MetaKeyword;
             postCategory.MetaDescription = postCategoryVm.MetaDescription;
             postCategory.Status = postCategoryVm.Status;
-
         }
+
         public static void UpdateProductCategory(this ProductCategory productCategory, ProductCategoryViewModel productCategoryVm)
         {
             productCategory.ID = productCategoryVm.ID;
@@ -47,8 +47,8 @@ namespace LND.Web.Infrastructure.Extensions
             productCategory.MetaKeyword = productCategoryVm.MetaKeyword;
             productCategory.MetaDescription = productCategoryVm.MetaDescription;
             productCategory.Status = productCategoryVm.Status;
-
         }
+
         public static void UpdatePost(this Post post, PostViewModel postVm)
         {
             post.ID = postVm.ID;
@@ -69,6 +69,7 @@ namespace LND.Web.Infrastructure.Extensions
             post.MetaDescription = postVm.MetaDescription;
             post.Status = postVm.Status;
         }
+
         public static void UpdateProduct(this Product product, ProductViewModel productVm)
         {
             product.ID = productVm.ID;
@@ -97,7 +98,7 @@ namespace LND.Web.Infrastructure.Extensions
             product.Quantity = productVm.Quantity;
         }
 
-        public static void UpdateFeedback(this Feedback feedback,FeedbackViewModel feedbackVm)
+        public static void UpdateFeedback(this Feedback feedback, FeedbackViewModel feedbackVm)
         {
             feedback.Name = feedbackVm.Name;
             feedback.Email = feedbackVm.Email;

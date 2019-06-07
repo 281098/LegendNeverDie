@@ -1,0 +1,42 @@
+﻿@model IEnumerable<LND.Web.Models.PostCategoryViewModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/layouts.cshtml";
+}
+<script src="~/Assets/client/js/jquery-1.12.3.js"></script>
+<script src="~/Assets/client/js/controllers/newsPost.js"></script>
+<div class="h2t_img_SMN_header" id="myCarousel">
+    <div class="container">
+        <div class="services-breadcrumb">
+            <div class="agile_inner_breadcrumb">
+                <ul class="w3_short">
+                    <li><a href="/">Trang chủ</a><i>|</i></li>
+                    <li>Tin tức</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="width:100%; height:600px;background:#ddd">
+    <h3 style="padding-left:5%;color:#b40909;width:65%;padding-bottom:30px;padding-top:20px">Tin tức </h3>
+    <div style="width:5%;height:500px;float:left"></div>
+    <div style=" background:white!important;width:90%;height:500px;float:left;border:1px solid #680c0c;border-radius:10px;">
+        <div class="news_conten_left">
+            @foreach (var post in Model.OrderByDescending(x => x.CreatedDate).Take(6))
+            {
+                var url = "/" + post.Alias + "-html";
+
+                <div style="padding:15px 30px; width:100%;height:70px;">
+                    <img src="@post.Image" style="width:50px;height:60px;float:left" />
+                    <div style="float:left;padding:10px 10px">
+                        <a href="javascrip:void(0);" id=" @post.Alias"><p>@post.Name</p></a>
+                        <small style="color:#808080">@post.CreatedBy đã tạo @post.CreatedDate</small>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            }
+        </div>
+        <div class="news_content_right" id="divNewsRight" style="display:none">
+        </div>
+    </div>
+</div>
