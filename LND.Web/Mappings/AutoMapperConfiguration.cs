@@ -10,8 +10,6 @@ namespace LND.Web.Mappings
 {
     public class AutoMapperConfiguration
     {
-      
-      
         //var config = new MapperConfiguration(cfg =>
         //{
         //    cfg.CreateMap<Post, PostViewModel>();
@@ -20,10 +18,8 @@ namespace LND.Web.Mappings
         //IMapper mapper = config.CreateMapper();
         //var source = new Post();
         //var dest = mapper.Map<Post, PostViewModel>(source);
-    
-
-
     }
+
     public class MappingProfile : Profile
     {
         public MappingProfile()
@@ -34,7 +30,6 @@ namespace LND.Web.Mappings
             CreateMap<ProductCategory, ProductCategoryViewModel>();
             CreateMap<Product, ProductViewModel>();
             CreateMap<ProductTag, ProductTagViewModel>();
-            CreateMap<ContactDetail, ContactDetailViewModel>();
         }
     }
 }

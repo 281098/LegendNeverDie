@@ -6,6 +6,7 @@ using LND.Web.App_Start;
 using LND.Web.Infrastructure.Extensions;
 using LND.Web.Models;
 using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
@@ -18,6 +19,8 @@ namespace LND.Web.Controllers
         private IProductService _productService;
         private IOrderService _orderService;
         private ApplicationUserManager _userManager;
+
+        public object ListProduct { get; private set; }
 
         public ShoppingCartController(IOrderService orderService, IProductService productService, ApplicationUserManager userManager)
         {
@@ -164,8 +167,7 @@ namespace LND.Web.Controllers
         public JsonResult CreateOrder(string orderViewModel)
         {
             var order = new JavaScriptSerializer().Deserialize<OrderViewModel>(orderViewModel);
-            var orderNew = new Order();
-
+            var orderNew = new Order();        
             orderNew.UpdateOrder(order);
 
             if (Request.IsAuthenticated)
@@ -176,19 +178,52 @@ namespace LND.Web.Controllers
 
             var cart = (List<ShoppingCartViewModel>)Session[CommonConstants.SessionCart];
             List<OrderDetail> orderDetails = new List<OrderDetail>();
+            List<OrderAdmin> orderAdmins = new List<OrderAdmin>();
+            var admin = new OrderAdmin()
+            {
+                CustomerName = orderNew.CustomerName,
+                CustomerMobile = orderNew.CustomerMobile,
+                CustomerAddress = orderNew.CustomerAddress,
+                CustomerEmail = orderNew.CustomerEmail,
+                CreatedDate = orderNew.CreatedDate,
+                PaymentMethod = orderNew.PaymentMethod,
+                PaymentStatus = orderNew.PaymentStatus,
+                CustomerMessage = orderNew.CustomerMessage,
+               
+            };
             foreach (var item in cart)
             {
                 var detail = new OrderDetail();
                 detail.ProductID = item.ProductId;
                 detail.Quantitty = item.Quantity;
                 orderDetails.Add(detail);
-            }
 
+                //admin
+                admin.ProductName += item.Product.Name + ", ";
+                admin.Quantitty += item.Quantity+", ";
+                admin.Price += item.Product.Price+", ";
+                admin.TotalPrice += item.Product.Price * item.Quantity;
+              
+            }
+            orderAdmins.Add(admin);
             _orderService.Create(orderNew, orderDetails);
+            _orderService.CreateOrderAdmin(orderAdmins);
+
+            SendMailCreateOrder(order, orderDetails);
             return Json(new
             {
                 status = true
             });
+        }
+
+        public void SendMailCreateOrder(OrderViewModel order, List<OrderDetail> orderDetail)
+        {
+            string content = System.IO.File.ReadAllText(Server.MapPath("/Assets/client/mail/OrderSuccess.html"));
+            content = content.Replace("{{FullName}}", order.CustomerName);
+            content = content.Replace("{{Address}}", order.CustomerAddress);
+            //content = content.Replace("{{CreatedDate}}", orderDetail);
+
+            MailHelper.SendMail(order.CustomerEmail, "Đặt hàng thành công", content);
         }
     }
 }

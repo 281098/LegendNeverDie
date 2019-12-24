@@ -6,6 +6,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace LND.Data.Infrastructure
 {
     public abstract class RepositoryBase<T> : IRepository<T> where T : class
@@ -42,6 +43,7 @@ namespace LND.Data.Infrastructure
         {
             dbSet.Attach(entity);
             dataContext.Entry(entity).State = EntityState.Modified;
+           
         }
 
         public virtual T Delete(T entity)
@@ -58,6 +60,7 @@ namespace LND.Data.Infrastructure
             IEnumerable<T> objects = dbSet.Where<T>(where).AsEnumerable();
             foreach (T obj in objects)
                 dbSet.Remove(obj);
+
         }
 
         public virtual T GetSingleById(int id)

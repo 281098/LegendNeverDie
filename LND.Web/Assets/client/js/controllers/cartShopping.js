@@ -84,7 +84,7 @@
             PaymentMethod: "Thanh toán tiền mặt",
             Status: false
         }
-        if (order.CustomerName != "" && order.CustomerAddress != "") {
+     
             $.ajax({
                 url: '/ShoppingCart/CreateOrder',
                 type: 'POST',
@@ -104,13 +104,7 @@
                     }
                 }
             });
-        }
-        else {
-            $('#btnCreateOrder').off('click').on('click', function (e) {
-                e.preventDefault();
-                alert('Bạn phải điền đầy đủ thông tin')
-            });
-        }
+      
     },
     getTotalOrder: function () {
         var listTextBox = $('.txtQuantity');
@@ -191,7 +185,7 @@
                             Quantity: item.Quantity,
                             Amount: numeral(item.Quantity * item.Product.Price).format('0,0')
                         });
-                        countItem += 1;
+                        countItem++;
                     });
 
                     $('#cartBody').html(html);

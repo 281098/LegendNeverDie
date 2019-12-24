@@ -8,24 +8,23 @@ namespace LND.Web.Models
     {
         public int ID { set; get; }
 
-        [Required]
+        [Required(ErrorMessage = "Name is required")]
         [MaxLength(256)]
         public string CustomerName { set; get; }
 
-        [Required]
+        [Required(ErrorMessage = "Address is Required")]
         [MaxLength(256)]
         public string CustomerAddress { set; get; }
 
-        [Required]
-        [MaxLength(256)]
+        [Required(ErrorMessage = "Email không được để trống")]
+        [EmailAddress(ErrorMessage = "Email không đúng")]
         public string CustomerEmail { set; get; }
 
-        [Required]
+        [Required(ErrorMessage = "Phai nhap sdt")]
         [MaxLength(50)]
         public string CustomerMobile { set; get; }
 
-        [Required]
-        [MaxLength(256)]
+        [MaxLength(256, ErrorMessage = "Ghi chu khong duoc qua 256 ki tu")]
         public string CustomerMessage { set; get; }
 
         [MaxLength(256)]

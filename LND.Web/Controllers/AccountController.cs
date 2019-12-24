@@ -78,27 +78,38 @@ namespace LND.Web.Controllers
                     ModelState.AddModelError("email", "Tài khoản đã tồn tại");
                     return View(model);
                 }
-                var user = new ApplicationUser()
+                if (model.Password == model.ConfirmPassword)
                 {
-                    UserName = model.UserName,
-                    Email = model.Email,
-                    EmailConfirmed = true,
-                    BirthDay = DateTime.Now,
-                };
+                    var user = new ApplicationUser()
+                    {
+                        FullName = model.FullName,
+                        Address = model.Address,
+                        UserName = model.UserName,
+                        Email = model.Email,
+                        EmailConfirmed = true,
+                        BirthDay = DateTime.Now,
+                        PhoneNumber = model.PhoneNumber
+                    };
 
-                await _userManager.CreateAsync(user, model.Password);
+                    await _userManager.CreateAsync(user, model.Password);
 
-                var adminUser = await _userManager.FindByEmailAsync(model.Email);
-                if (adminUser != null)
-                    await _userManager.AddToRolesAsync(adminUser.Id, new string[] { "User" });
+                    var adminUser = await _userManager.FindByEmailAsync(model.Email);
+                    if (adminUser != null)
+                        await _userManager.AddToRolesAsync(adminUser.Id, new string[] { "User" });
 
-                string content = System.IO.File.ReadAllText(Server.MapPath("/Assets/client/mail/register.html"));
-                content = content.Replace("{{UserName}}", adminUser.FullName);
-                content = content.Replace("{{Link}}", "http://localhost:49972/dang-nhap-html");
+                    string content = System.IO.File.ReadAllText(Server.MapPath("/Assets/client/mail/register.html"));
+                    content = content.Replace("{{FullName}}", adminUser.FullName);
+                    content = content.Replace("{{UserName}}", adminUser.UserName);
+                    content = content.Replace("{{PhoneNumber}}", adminUser.PhoneNumber);
+                    content = content.Replace("{{Address}}", adminUser.Address);
+                    content = content.Replace("{{Link}}", "http://localhost:49972/dang-nhap-html");
 
-                MailHelper.SendMail(adminUser.Email, "Đăng ký thành công", content);
+                    MailHelper.SendMail(adminUser.Email, "Đăng ký thành công", content);
 
-                ViewData["SuccessMsg"] = "Đăng ký thành công";
+                    ViewData["SuccessMsg"] = "Đăng ký thành công";
+                }
+                else
+                    ViewData["FailedMessage"] = "Mật khẩu xác nhận phải trùng với Mật khẩu";
             }
 
             return View();
@@ -118,6 +129,7 @@ namespace LND.Web.Controllers
             if (ModelState.IsValid)
             {
                 ApplicationUser user = _userManager.Find(model.UserName, model.Password);
+
                 if (user != null)
                 {
                     IAuthenticationManager authenticationManager = HttpContext.GetOwinContext().Authentication;

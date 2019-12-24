@@ -1,13 +1,13 @@
 ﻿$(function () {
     $(window).hover(function (e) {
-        $('#logo-hover').addClass('rollIn animated');
+        //$('#logo-hover').addClass('rollIn animated');
         $('#menu-hover').addClass('lightSpeedIn animated');
         $('#cart-hover').addClass('bounceInDown animated');
         $('.top-header').addClass('rotateInDownLeft animated');
     });
 
     $(window).click(function (e) {
-        $('#logo-hover').removeClass('rollIn animated');
+        //$('#logo-hover').removeClass('rollIn animated');
         $('#menu-hover').removeClass('lightSpeedIn animated');
         $('#cart-hover').removeClass('bounceInDown animated');
     });

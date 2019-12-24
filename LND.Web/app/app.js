@@ -3,8 +3,9 @@
 (function () {
     angular.module('legendneverdie',
         [   'LND.products',
+            'LND.orders',
             'LND.product_categories',
-            'LND.post_categories',
+            'LND.post_categories',           
             'LND.common'])
         .config(config)
         .config(configAuthentication);

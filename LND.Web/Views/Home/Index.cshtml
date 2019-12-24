@@ -5,6 +5,7 @@
 }
 
 @{Html.RenderAction("HomeSlide", "Home"); }
+@{Html.RenderAction("MessageFacebook", "Home"); }
 
 <div class="sale-w3ls-h2t-top" style="padding-bottom: 0px !important;"></div>
 <div class="new_arrivals_agile_w3ls_info" style="padding-top: 10px !important;">
@@ -34,7 +35,7 @@
                                 <div class="men-thumb-item">
                                     <img src="@product.Image" alt="" class="pro-image-front">
                                     <img src="@product.Image" alt="" class="pro-image-back">
-                                    
+
                                     <div class="men-cart-pro">
                                         <div class="inner-men-cart-pro">
                                             <a href="@url" class="link-product-add-cart">Xem ngay</a>
@@ -69,7 +70,6 @@
                                             <input type="submit" data-id="@product.ID" value="Thêm vào giỏ hàng" class="button btnAddToCart" />
                                         </div>
                                     }
-
                                 </div>
                             </div>
                         </div>

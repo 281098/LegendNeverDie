@@ -110,11 +110,11 @@ namespace LND.Web.Infrastructure.Extensions
         public static void UpdateOrder(this Order order, OrderViewModel orderVm)
         {
             order.CustomerName = orderVm.CustomerName;
-            order.CustomerAddress = orderVm.CustomerName;
-            order.CustomerEmail = orderVm.CustomerName;
-            order.CustomerMobile = orderVm.CustomerName;
-            order.CustomerMessage = orderVm.CustomerName;
-            order.PaymentMethod = orderVm.CustomerName;
+            order.CustomerAddress = orderVm.CustomerAddress;
+            order.CustomerEmail = orderVm.CustomerEmail;
+            order.CustomerMobile = orderVm.CustomerMobile;
+            order.CustomerMessage = orderVm.CustomerMessage;
+            order.PaymentMethod = orderVm.PaymentMethod;
             order.CreatedDate = DateTime.Now;
             order.CreatedBy = orderVm.CreatedBy;
             order.Status = orderVm.Status;

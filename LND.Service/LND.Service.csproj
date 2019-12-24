@@ -41,7 +41,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ContactDetailService.cs" />
     <Compile Include="ErrorService.cs" />
     <Compile Include="FeedbackService.cs" />
     <Compile Include="OrderService.cs" />
@@ -64,6 +63,9 @@
       <Project>{66d365cf-bf27-4d80-945f-56d74067d0d0}</Project>
       <Name>LND.Model</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,11 +1,10 @@
 ﻿@model LND.Web.Models.RegisterViewModel
 
 @{
-   
+
     ViewBag.Title = "Register";
     Layout = "~/Views/Shared/layouts.cshtml";
 }
-
 
 <!-- Modal2 -->
 <!-- Modal content-->
@@ -26,24 +25,45 @@
                     </div>
 
                 }
+                if (ViewData["FailedMessage"] != null)
+                {
+                    <div class="alert alert-error" role="alert">
+                        <strong>Đăng ký thất bại! </strong>
+                    </div>
+                }
                 <div class="styled-input agile-styled-input-top">
                     @Html.TextBoxFor(model => model.FullName)
-                    <label>Họ tên</label>
+                    <label>Họ tên<Sup class="star">*</Sup></label>
                     <span></span>
                 </div>
                 <div class="styled-input agile-styled-input-top">
                     @Html.TextBoxFor(model => model.UserName)
-                    <label>Tài khoản</label>
+                    <label title="Phải nhập">Tài khoản<Sup class="star">*</Sup></label>
                     <span></span>
                 </div>
                 <div class="styled-input">
                     @Html.TextBoxFor(model => model.Email)
-                    <label>Email</label>
+                    <label title="Phải nhập">Email<Sup class="star">*</Sup></label>
                     <span></span>
                 </div>
                 <div class="styled-input">
-                    @Html.TextBoxFor(model => model.Password)
-                    <label>Mật khẩu</label>
+                    @Html.PasswordFor(model => model.Password)
+                    <label title="Phải nhập">Mật khẩu<Sup class="star">*</Sup></label>
+                    <span></span>
+                </div>
+                <div class="styled-input">
+                    @Html.PasswordFor(model => model.ConfirmPassword)
+                    <label title="Phải nhập">Xác nhận mật khẩu<Sup class="star">*</Sup></label>
+                    <span></span>
+                </div>
+                <div class="styled-input">
+                    @Html.TextBoxFor(model => model.PhoneNumber)
+                    <label>Số điện thoại</label>
+                    <span></span>
+                </div>
+                <div class="styled-input">
+                    @Html.TextBoxFor(model => model.Address)
+                    <label>Địa chỉ</label>
                     <span></span>
                 </div>
 
@@ -78,8 +98,7 @@
             </ul>
             <div class="clearfix"></div>
             <p><a href="#">By clicking register, I agree to your terms</a></p>
-
-        </div>    
+        </div>
         <div class="clearfix"></div>
     </div>
 </div>

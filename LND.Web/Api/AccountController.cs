@@ -1,10 +1,10 @@
-﻿using Microsoft.AspNet.Identity.Owin;
+﻿using LND.Web.App_Start;
+using Microsoft.AspNet.Identity.Owin;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
-using LND.Web.App_Start;
 
 namespace LND.Web.Api
 {
@@ -57,12 +57,10 @@ namespace LND.Web.Api
             {
                 return request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
             }
-            // This doesn't count login failures towards account lockout
-            // To enable password failures to trigger account lockout, change to shouldLockout: true
+            // This doesn't count login failures towards account lockout To enable password failures
+            // to trigger account lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(userName, password, rememberMe, shouldLockout: false);
             return request.CreateResponse(HttpStatusCode.OK, result);
         }
-
-
     }
 }

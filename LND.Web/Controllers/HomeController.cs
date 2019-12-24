@@ -50,6 +50,10 @@ namespace LND.Web.Controllers
             return PartialView();
         }
 
-        // account
+        [ChildActionOnly]
+        public ActionResult MessageFacebook()
+        {
+            return PartialView();
+        }
     }
 }

@@ -104,6 +104,7 @@ namespace LND.Web.Api
                     var newPostCategory = new PostCategory();
                     newPostCategory.UpdatePostCategory(postCategoryVm);
                     newPostCategory.CreatedDate = DateTime.Now;
+                    //newPostCategory.CreatedBy = User.Identity.Name;
                     _postCategoryService.Add(newPostCategory);
                     _postCategoryService.Save();
 
