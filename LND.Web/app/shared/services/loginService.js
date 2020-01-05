@@ -15,6 +15,7 @@
                 userInfo = {
                     accessToken: response.access_token,
                     userName: userName
+            
                 };
                 authenticationService.setTokenInfo(userInfo);
                 authData.authenticationData.IsAuthenticated = true;

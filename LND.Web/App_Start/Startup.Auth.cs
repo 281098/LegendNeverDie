@@ -10,6 +10,10 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using LND.Data;
 using LND.Model.Models;
+using LND.Web.Infrastructure.Core;
+using LND.Service;
+using System.Linq;
+using LND.Common;
 
 [assembly: OwinStartup(typeof(LND.Web.App_Start.Startup))]
 
@@ -101,10 +105,22 @@ namespace LND.Web.App_Start
                 }
                 if (user != null)
                 {
-                    ClaimsIdentity identity = await userManager.CreateIdentityAsync(
-                                                           user,
-                                                           DefaultAuthenticationTypes.ExternalBearer);
-                    context.Validated(identity);
+                    // quyền truy cập trang Admin
+                    var applicationGroupService = ServiceFactory.Get<IApplicationGroupService>();
+                    var listGroup = applicationGroupService.GetListGroupByUserId(user.Id);
+                    if (listGroup.Any(x => x.Name == CommonConstants.Administrator))
+                    {
+                        ClaimsIdentity identity = await userManager.CreateIdentityAsync(
+                                                          user,
+                                                          DefaultAuthenticationTypes.ExternalBearer);
+                        context.Validated(identity);
+                    }
+                    else
+                    {
+                        context.SetError("invalid_group", "Bạn không có quyền truy cập");
+                        context.Rejected();
+                    }
+
                 }
                 else
                 {

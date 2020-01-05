@@ -95,7 +95,7 @@ namespace LND.Web.Controllers
 
                     var adminUser = await _userManager.FindByEmailAsync(model.Email);
                     if (adminUser != null)
-                        await _userManager.AddToRolesAsync(adminUser.Id, new string[] { "User" });
+                        await _userManager.AddToRolesAsync(adminUser.Id, new string[] { "ViewUser" });
 
                     string content = System.IO.File.ReadAllText(Server.MapPath("/Assets/client/mail/register.html"));
                     content = content.Replace("{{FullName}}", adminUser.FullName);

@@ -19,6 +19,7 @@ namespace LND.Web.Models
         public string Image { set; get; }
 
         public string MoreImages { set; get; }
+        public decimal PriceIn { set; get; }
 
         public decimal Price { set; get; }
 

@@ -149,33 +149,53 @@
                 </li>
                 <li class="treeview">
                     <a href="javascript:void(0);">
-                        <i class="fa fa-files-o"></i>
+                        <i class="glyphicon glyphicon-circle-arrow-down"></i>
                         <span>Sản phẩm</span>
                         <span class="label label-primary pull-right">2</span>
                     </a>
                     <ul class="treeview-menu">
                         <li><a ui-sref="product_categories"><i class="fa fa-circle-o"></i> Danh mục sản phẩm</a></li>
                         <li><a ui-sref="products"><i class="fa fa-circle-o"></i> Sản phẩm</a></li>
-
                     </ul>
-
                 </li>
                 <li class="treeview">
                     <a ui-sref="orders">
                         <i class="fa fa-files-o"></i>
                         <span>Quản lí đơn đặt hàng</span>
-                        <span class="label label-primary pull-right">3</span>
+
                     </a>
                 </li>
                 <li class="treeview">
                     <a ui-sref="post_categories">
-                        <i class="fa fa-files-o"></i>
+                        <i class="glyphicon glyphicon-floppy-disk"></i>
                         <span>Bài viết</span>
-                        <span class="label label-primary pull-right">1</span>
+
                     </a>
-
                 </li>
-
+                <li class="treeview">
+                    <a href="javascript:void(0);">
+                        <i class="glyphicon glyphicon-grain"></i>
+                        <span>thống kê</span>
+                        <span class="label label-primary pull-right">2</span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <!--<li><a ui-sref="users"><i class="glyphicon glyphicon-user"></i> Thống kê người dùng mới</a></li>-->
+                        <li><a ui-sref="statistic_revenue"><i class="glyphicon glyphicon-usd"></i> Thống kê doanh thu</a></li>
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="javascript:void(0);">
+                        <i class="glyphicon glyphicon-user"></i>
+                        <span>Quản lí người dùng</span>
+                        <span class="label label-primary pull-right">3</span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a ui-sref="application_groups"><i class="fa fa-circle-o"></i> Nhóm người dùng</a></li>
+                        <li><a ui-sref="application_roles"><i class="fa fa-circle-o"></i> Quyền</a></li>
+                        <li><a ui-sref="application_users"><i class="fa fa-circle-o"></i> Người dùng</a></li>
+                    </ul>
+                </li>
+                
             </ul>
         </section>
         <!-- /.sidebar -->

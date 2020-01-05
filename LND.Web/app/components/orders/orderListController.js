@@ -5,13 +5,17 @@
 
     function orderListController($scope, apiService, notificationService, $ngBootbox, $filter) {
         $scope.orders = [];
+        $scope.status = [];
         $scope.page = 0;
         $scope.pagesCount = 0;
         $scope.getOrders = getOrders;
         $scope.keyword = '';
         $scope.deleteOrder = deleteOrder;
         $scope.search = search;
-   
+        $scope.transferOrder = transferOrder;
+        $scope.completeOrder = completeOrder;
+       
+
         function search() {
             getOrders();
         }
@@ -30,6 +34,42 @@
                 })
             });
         }
+        function transferOrder(id) {
+            $ngBootbox.confirm('Bạn có chắc muốn duyệt đơn hàng này?').then(function () {
+                var config = {
+                    params: {
+                        id: id
+                    }
+                }
+                apiService.del('api/order/transfer', config, function () {
+                    notificationService.displaySuccess('Đã duyệt');
+                    //$('#btntransferOrder').css("display", "none");
+
+                    search();
+
+                }, function () {
+                    notificationService.displayError('Duyệt đơn hàng thất bại');
+                })
+            });
+        }
+        function completeOrder(id) {
+            $ngBootbox.confirm('Xác nhận đơn hàng đã thanh toán').then(function () {
+                var config = {
+                    params: {
+                        id: id
+                    }
+                }
+                apiService.del('api/order/complete', config, function () {
+                    notificationService.displaySuccess('Đơn hàng đã được thanh toán');
+                    $scope.hide_complete = false;
+                    // search();
+                    getOrders();
+                }, function () {
+                    notificationService.displayError('Thất bại');
+                })
+            });
+        }
+
         function getOrders(page) {
             page = page || 0;
             var config = {
@@ -43,15 +83,26 @@
                 if (result.data.TotalCount == 0) {
                     notificationService.displayWarning('Không có bản ghi nào được tìm thấy.');
                 }
-                $scope.orders = result.data.Items;
+                $scope.orders = result.data.Items;            
                 $scope.page = result.data.Page;
                 $scope.pagesCount = result.data.TotalPages;
                 $scope.totalCount = result.data.TotalCount;
+                $.each($scope.orders, function (i, item) {
+                    if (item.OrderStatus === "Đã nhận hàng") {
+                        $('#btntransferOrder').css("display", "none");
+                        //$('#btntransferOrder').Attr('disabled');
+                       // $('#btntransferOrder').attr('disabled', 'disabled');
+                        console.log("Đã nhận hàng");
+                    }
+
+
+                });
             }, function () {
-                console.log('Load productcategory failed.');
+                console.log('Load order failed.');
             });
         }
 
         $scope.getOrders();
+           
     }
 })(angular.module('LND.orders'));

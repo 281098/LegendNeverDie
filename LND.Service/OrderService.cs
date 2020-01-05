@@ -9,9 +9,11 @@ namespace LND.Service
     public interface IOrderService
     {
         bool Create(Order order, List<OrderDetail> orderDetails);
-        bool CreateOrderAdmin(List<OrderAdmin> orderAdmin);
+        bool CreateOrderAdmin(OrderAdmin orderAdmin);
         IEnumerable<OrderAdmin> GetAll(string keyword);
         OrderAdmin Delete(int id);
+        void Transfer(int id);
+        void Complete(int id);
         void Save();
     }
 
@@ -28,6 +30,15 @@ namespace LND.Service
             this._orderDetailRepository = orderDetailRepository;
             this._orderAdminRepository = orderAdminRepository;
             this._unitOfWork = unitOfWork;
+        }
+
+        public void Complete(int id)
+        {
+            var order = _orderAdminRepository.GetSingleById(id);
+            order.PaymentStatus = "Đã thanh toán";
+            order.OrderStatus = "Đã nhận hàng";
+
+            _orderAdminRepository.Update(order);
         }
 
         public bool Create(Order order, List<OrderDetail> orderDetails)
@@ -51,14 +62,11 @@ namespace LND.Service
             }
         }
 
-        public bool CreateOrderAdmin(List<OrderAdmin> orderAdmin)
+        public bool CreateOrderAdmin(OrderAdmin orderAdmin)
         {
             try
-            {
-                foreach(var item in orderAdmin)
-                {
-                    _orderAdminRepository.Add(item);
-                }                
+            {                            
+                _orderAdminRepository.Add(orderAdmin);           
                 _unitOfWork.Commit();
                 return true;
             }
@@ -82,7 +90,10 @@ namespace LND.Service
         {
             if (!string.IsNullOrEmpty(keyword))
             {
-                return _orderAdminRepository.GetMulti(x => x.CustomerName.Contains(keyword) || x.CustomerMobile.Contains(keyword));
+                
+                return _orderAdminRepository.GetMulti(x => x.CustomerName.Contains(keyword) || x.CustomerMobile.Contains(keyword)
+                                                       || x.CustomerAddress.Contains(keyword)|| x.PaymentMethod.Contains(keyword)
+                                                       ||x.OrderStatus.Contains(keyword));
             }
               
             else
@@ -92,6 +103,14 @@ namespace LND.Service
         public void Save()
         {
             _unitOfWork.Commit();
+        }
+
+        public void Transfer(int id)
+        {
+            var order = _orderAdminRepository.GetSingleById(id);
+            order.OrderStatus = "Đơn hàng đã được duyệt, đang trong quá trình vận chuyển.";
+
+          _orderAdminRepository.Update(order);
         }
     }
 }

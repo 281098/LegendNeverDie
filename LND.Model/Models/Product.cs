@@ -28,6 +28,7 @@ namespace LND.Model.Models
 
         [Column(TypeName = "xml")]
         public string MoreImages { set; get; }
+        public decimal PriceIn { set; get; }
 
         public decimal Price { set; get; }
 

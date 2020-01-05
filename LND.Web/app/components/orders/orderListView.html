@@ -18,6 +18,12 @@
                         <span class="input-group-btn">
                             <button class="btn btn-default" type="button" ng-click="search()">Tìm kiếm</button>
                         </span>
+                        <!--<label>Chua dc duyet</label>
+                        <input name="all" type="checkbox" ng-click="selectOrderWait()" />
+                        <label>Dang van chuyen</label>
+                        <input name="all" type="checkbox" ng-click="selectOrderTransfer()" />
+                        <label>Da hoan thanh</label>
+                        <input name="all" type="checkbox" ng-click="selectOrderComplete()" />-->
                     </div><!-- /input-group -->
                 </div>
             </div>
@@ -25,22 +31,21 @@
                 <div class="col-md-12">
                     <table class="table table-bordered">
                         <tr>
-
-                            <th style="width: 3%">Mã đơn</th>
+                            <th style="width: 1%">Mã đơn</th>
                             <th style="width: 10%">Tên khách hàng</th>
                             <th style="width: 5%">Số điện thoại</th>
-                            <th style="width: 7%">Email</th>
-                            <th style="width: 9%">Địa chỉ</th>
-                            <th style="width: 8%">Ghi chú</th>
-                            <th style="width: 13%">Tên sản phẩm</th>
-                            <th style="width: 5%">Số lượng</th>
+                            <th style="width: 5%">Email</th>
+                            <th style="width: 8%">Địa chỉ</th>
+                            <th style="width: 5%">Ghi chú</th>
+                            <th style="width: 23%">Tên sản phẩm</th>
+                            <th style="width: 3%">Số lượng</th>
                             <th style="width: 5%">Giá tiền </th>
                             <th style="width: 5%">Thành tiền</th>
                             <th style="width: 5%">Ngày đặt</th>
                             <th style="width: 5%">Hình thức thanh toán</th>
                             <th style="width: 5%">Trạng thái thanh toán</th>
-                            <th style="width: 5%">Tình trạng đơn hàng </th>
-                            <th style="width: 1%">Hủy đơn hàng </th>
+                            <th style="width: 10%">Tình trạng đơn hàng </th>
+                            <th style="width: 5%">Thao tác </th>
 
                         </tr>
                         <tr ng-repeat="item in orders">
@@ -56,14 +61,18 @@
                             <td>{{item.TotalPrice}}</td>
                             <td>{{item.CreatedDate  | date:'dd/MM/yyyy hh:mm:ss'}}</td>
                             <td>{{item.PaymentMethod}}</td>
-                            <td>{{item.PaymentStatus|PaymentStatusFilter}}</td>
+                            <td>{{item.PaymentStatus}}</td>
                             <td>
                                 <span>
-                                    {{item.Status | OrderStatusFilter}}
-                                </span>
+                                    {{item.OrderStatus}}
+                                </span>                              
                             </td>
-                            <td>                         
-                                <button class="btn btn-sm btn-danger" ng-click="deleteOrder(item.Id)"><i class="fa fa-trash"></i></button>
+                            <td>
+
+                                <!--<button id="btntransferOrder" disabled class="btn btn-sm btn-success" title="Duyệt đơn" ng-click="transferOrder(item.Id)"><i class="glyphicon glyphicon-ok"></i></button>-->
+                                <button type="button" disabled class="btn btn-sm btn-success" title="Duyệt đơn" ng-click="transferOrder(item.Id)"><i class="glyphicon glyphicon-ok"></i></button>
+                                <button id="btncompleteOrder" class="btn btn-sm btn-primary" title="Hoàn thành đơn hàng" ng-click="completeOrder(item.Id)"><i class="glyphicon glyphicon-usd"></i></button>
+                                <button class="btn btn-sm btn-danger" title="Xóa đơn" ng-click="deleteOrder(item.Id)"><i class="fa fa-trash"></i></button>
                             </td>
                         </tr>
                         <tfoot>

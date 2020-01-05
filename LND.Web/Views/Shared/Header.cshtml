@@ -54,27 +54,33 @@
 
                     @foreach (var category in Model.OrderByDescending(x => x.CreatedDate).Take(4))
                     {
-                        var url = "/" + category.Alias + "-pc-" + category.ID + "-html";
-                        if (category.Name.Contains("nam"))
+                        if (category.Status == true)
                         {
+                            var url = "/" + category.Alias + "-pc-" + category.ID + "-html";
+                            if (category.Name.Contains("nam"))
+                            {
 
-                            <ul style="padding:0!important;float:left;width:50%">
+                                <ul style="padding:0!important;float:left;width:50%">
 
-                                <li><a href="@url">@category.Name</a></li>
-                            </ul>
+                                    <li><a href="@url">@category.Name</a></li>
+                                </ul>
 
+                            }
                         }
                     }
 
                     @foreach (var category in Model.OrderByDescending(x => x.CreatedDate).Skip(4))
                     {
-                        var url = "/" + category.Alias + "-pc-" + category.ID + "-html";
-                        if (category.Name.Contains("nam"))
+                        if (category.Status == true)
                         {
-                            <ul style="padding:0!important;float:left;width:50%">
+                            var url = "/" + category.Alias + "-pc-" + category.ID + "-html";
+                            if (category.Name.Contains("nam"))
+                            {
+                                <ul style="padding:0!important;float:left;width:50%">
 
-                                <li><a href="@url">@category.Name</a></li>
-                            </ul>
+                                    <li><a href="@url">@category.Name</a></li>
+                                </ul>
+                            }
                         }
                     }
                     <div class="clearfix"></div>

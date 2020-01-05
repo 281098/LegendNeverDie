@@ -4,6 +4,10 @@
     angular.module('legendneverdie',
         [   'LND.products',
             'LND.orders',
+            'LND.statistics',
+            'LND.application_users',
+            'LND.application_roles',
+            'LND.application_groups',
             'LND.product_categories',
             'LND.post_categories',           
             'LND.common'])

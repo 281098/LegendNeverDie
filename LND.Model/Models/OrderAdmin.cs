@@ -18,11 +18,13 @@ namespace LND.Model.Models
         public string ProductName { get; set; }
         public string Price { get; set; }
         public decimal TotalPrice { get; set; }
+        public decimal TotalPriceIn { get; set; }
+        public decimal Income { get; set; }
         public string Quantitty { set; get; }
         public DateTime? CreatedDate { set; get; }
         public string PaymentMethod { set; get; }
         public string PaymentStatus { set; get; }
-        public bool Status { set; get; }
+        public string OrderStatus { set; get; }
 
     }
 }

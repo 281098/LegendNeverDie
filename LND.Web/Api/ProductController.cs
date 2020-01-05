@@ -15,7 +15,7 @@ using LND.Web.Models;
 namespace LND.Web.Api
 {
     [RoutePrefix("api/product")]
-    [Authorize]
+    //[Authorize]
     public class ProductController : ApiControllerBase
     {
         #region Initialize

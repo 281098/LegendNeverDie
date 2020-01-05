@@ -29,7 +29,22 @@
     },
     {
       "library": "angular-local-storage@0.7.1",
-     
+
+      "destination": "Assets/admin/libs/"
+    },
+    {
+      "library": "angular-chart.js@1.1.1",
+
+      "destination": "Assets/admin/libs/"
+    },
+    {
+      "library": "Chart.js@2.9.3",
+
+      "destination": "Assets/admin/libs/"
+    },
+    {
+      "library": "checklist-model@1.0.0",
+
       "destination": "Assets/admin/libs/"
     }
   ]

@@ -182,8 +182,44 @@
     <Compile Include="Migrations\201912231530084_finish.Designer.cs">
       <DependentUpon>201912231530084_finish.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201912251043012_changestatus.cs" />
+    <Compile Include="Migrations\201912251043012_changestatus.Designer.cs">
+      <DependentUpon>201912251043012_changestatus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912251807452_addPriceIn.cs" />
+    <Compile Include="Migrations\201912251807452_addPriceIn.Designer.cs">
+      <DependentUpon>201912251807452_addPriceIn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912251906069_addincomecolumn.cs" />
+    <Compile Include="Migrations\201912251906069_addincomecolumn.Designer.cs">
+      <DependentUpon>201912251906069_addincomecolumn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912251912185_addmorepricein.cs" />
+    <Compile Include="Migrations\201912251912185_addmorepricein.Designer.cs">
+      <DependentUpon>201912251912185_addmorepricein.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912260053448_changeorderdetails.cs" />
+    <Compile Include="Migrations\201912260053448_changeorderdetails.Designer.cs">
+      <DependentUpon>201912260053448_changeorderdetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912260132419_revenueStatisticPp.cs" />
+    <Compile Include="Migrations\201912260132419_revenueStatisticPp.Designer.cs">
+      <DependentUpon>201912260132419_revenueStatisticPp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912260420179_renameTableIdentity.cs" />
+    <Compile Include="Migrations\201912260420179_renameTableIdentity.Designer.cs">
+      <DependentUpon>201912260420179_renameTableIdentity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912260459505_addGroupRole.cs" />
+    <Compile Include="Migrations\201912260459505_addGroupRole.Designer.cs">
+      <DependentUpon>201912260459505_addGroupRole.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\ApplicationGroupRepository.cs" />
+    <Compile Include="Repositories\ApplicationRoleGroupRepository.cs" />
+    <Compile Include="Repositories\ApplicationRoleRepository.cs" />
+    <Compile Include="Repositories\ApplicationUserGroupRepository.cs" />
     <Compile Include="Repositories\ErrorRepository.cs" />
     <Compile Include="Repositories\FeedbackRepository.cs" />
     <Compile Include="Repositories\OrderAdminRepositoty.cs" />
@@ -256,6 +292,30 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201912231530084_finish.resx">
       <DependentUpon>201912231530084_finish.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912251043012_changestatus.resx">
+      <DependentUpon>201912251043012_changestatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912251807452_addPriceIn.resx">
+      <DependentUpon>201912251807452_addPriceIn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912251906069_addincomecolumn.resx">
+      <DependentUpon>201912251906069_addincomecolumn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912251912185_addmorepricein.resx">
+      <DependentUpon>201912251912185_addmorepricein.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912260053448_changeorderdetails.resx">
+      <DependentUpon>201912260053448_changeorderdetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912260132419_revenueStatisticPp.resx">
+      <DependentUpon>201912260132419_revenueStatisticPp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912260420179_renameTableIdentity.resx">
+      <DependentUpon>201912260420179_renameTableIdentity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912260459505_addGroupRole.resx">
+      <DependentUpon>201912260459505_addGroupRole.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

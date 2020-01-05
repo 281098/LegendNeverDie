@@ -40,7 +40,7 @@ namespace LND.Web.Api
 
                 totalRow = model.Count();
                 var responseData = model.OrderByDescending(x => x.CreatedDate).Skip(page * pageSize).Take(pageSize);
-
+                
                 var paginationSet = new PaginationSet<OrderAdmin>()
                 {
                     Items = responseData,
@@ -71,6 +71,50 @@ namespace LND.Web.Api
 
                     var responseData = oldProductCategory;
                     response = request.CreateResponse(HttpStatusCode.Created, responseData);
+                }
+
+                return response;
+            });
+        }
+        [Route("transfer")]
+        [HttpDelete]
+        [AllowAnonymous]
+        public HttpResponseMessage Transfer(HttpRequestMessage request, int id)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                if (!ModelState.IsValid)
+                {
+                    response = request.CreateResponse(HttpStatusCode.BadRequest, ModelState);
+                }
+                else
+                {
+                    _orderService.Transfer(id);
+                    _orderService.Save();
+                    response = request.CreateResponse(HttpStatusCode.Created, true);
+                }
+
+                return response;
+            });
+        }
+        [Route("complete")]
+        [HttpDelete]
+        [AllowAnonymous]
+        public HttpResponseMessage Complete(HttpRequestMessage request, int id)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                if (!ModelState.IsValid)
+                {
+                    response = request.CreateResponse(HttpStatusCode.BadRequest, ModelState);
+                }
+                else
+                {
+                    _orderService.Complete(id);
+                    _orderService.Save();
+                    response = request.CreateResponse(HttpStatusCode.Created, true);
                 }
 
                 return response;

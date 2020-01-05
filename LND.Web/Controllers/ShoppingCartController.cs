@@ -178,7 +178,7 @@ namespace LND.Web.Controllers
 
             var cart = (List<ShoppingCartViewModel>)Session[CommonConstants.SessionCart];
             List<OrderDetail> orderDetails = new List<OrderDetail>();
-            List<OrderAdmin> orderAdmins = new List<OrderAdmin>();
+
             var admin = new OrderAdmin()
             {
                 CustomerName = orderNew.CustomerName,
@@ -187,41 +187,49 @@ namespace LND.Web.Controllers
                 CustomerEmail = orderNew.CustomerEmail,
                 CreatedDate = orderNew.CreatedDate,
                 PaymentMethod = orderNew.PaymentMethod,
-                PaymentStatus = orderNew.PaymentStatus,
+                PaymentStatus = "Chưa thanh toán",
                 CustomerMessage = orderNew.CustomerMessage,
-               
+                OrderStatus = "Chờ duyệt",
+                TotalPrice = 0             
             };
             foreach (var item in cart)
             {
                 var detail = new OrderDetail();
                 detail.ProductID = item.ProductId;
                 detail.Quantitty = item.Quantity;
+                decimal pricePromotion = Convert.ToDecimal(item.Product.Price * (1 - item.Product.PromotionPrice / 100));
+                detail.Price = pricePromotion;
                 orderDetails.Add(detail);
 
                 //admin
                 admin.ProductName += item.Product.Name + ", ";
-                admin.Quantitty += item.Quantity+", ";
-                admin.Price += item.Product.Price+", ";
-                admin.TotalPrice += item.Product.Price * item.Quantity;
-              
+                admin.Quantitty += item.Quantity + ", ";
+                admin.Price += pricePromotion + ", ";
+                admin.TotalPrice += pricePromotion * item.Quantity;
+                admin.TotalPriceIn = item.Product.PriceIn * item.Quantity;             
             }
-            orderAdmins.Add(admin);
+             admin.Income = admin.TotalPrice - admin.TotalPriceIn;
             _orderService.Create(orderNew, orderDetails);
-            _orderService.CreateOrderAdmin(orderAdmins);
+            _orderService.CreateOrderAdmin(admin);
 
-            SendMailCreateOrder(order, orderDetails);
+            SendMailCreateOrder(admin);
             return Json(new
             {
                 status = true
             });
         }
 
-        public void SendMailCreateOrder(OrderViewModel order, List<OrderDetail> orderDetail)
+        public void SendMailCreateOrder(OrderAdmin order)
         {
             string content = System.IO.File.ReadAllText(Server.MapPath("/Assets/client/mail/OrderSuccess.html"));
             content = content.Replace("{{FullName}}", order.CustomerName);
             content = content.Replace("{{Address}}", order.CustomerAddress);
-            //content = content.Replace("{{CreatedDate}}", orderDetail);
+            content = content.Replace("{{MobilePhone}}", order.CustomerMobile);
+            content = content.Replace("{{Products}}", order.ProductName);
+            string money = Convert.ToString(order.TotalPrice);
+            content = content.Replace("{{Total}}", money);
+            string date = Convert.ToString(order.CreatedDate);
+            content = content.Replace("{{CreatedDate}}", date);
 
             MailHelper.SendMail(order.CustomerEmail, "Đặt hàng thành công", content);
         }
