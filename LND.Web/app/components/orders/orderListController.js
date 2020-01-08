@@ -61,7 +61,7 @@
                 }
                 apiService.del('api/order/complete', config, function () {
                     notificationService.displaySuccess('Đơn hàng đã được thanh toán');
-                    $scope.hide_complete = false;
+                   
                     // search();
                     getOrders();
                 }, function () {
@@ -88,10 +88,12 @@
                 $scope.pagesCount = result.data.TotalPages;
                 $scope.totalCount = result.data.TotalCount;
                 $.each($scope.orders, function (i, item) {
-                    if (item.OrderStatus === "Đã nhận hàng") {
+                    if (item.OrderStatus == "Đơn hàng đã được duyệt, đang trong quá trình vận chuyển.") {
                         $('#btntransferOrder').css("display", "none");
-                        //$('#btntransferOrder').Attr('disabled');
-                       // $('#btntransferOrder').attr('disabled', 'disabled');
+                    }
+                    if (item.OrderStatus === "Đã nhận hàng") {
+                        
+                        $('#btncompleteOrder').css("display", "none");
                         console.log("Đã nhận hàng");
                     }
 

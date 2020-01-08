@@ -4220,6 +4220,7 @@
     <Content Include="Assets\client\js\common.js" />
     <Content Include="Assets\client\js\controllers\cartShopping.js" />
     <Content Include="Assets\client\js\controllers\animation.js" />
+    <Content Include="Assets\client\js\controllers\jquerycustom.js" />
     <Content Include="Assets\client\js\controllers\newsPost.js" />
     <Content Include="Assets\client\js\easy-responsive-tabs.js" />
     <Content Include="Assets\client\js\imagezoom.js" />

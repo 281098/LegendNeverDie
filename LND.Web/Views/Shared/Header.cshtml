@@ -4,9 +4,10 @@
     @if (Request.IsAuthenticated)
     {
         @Html.AntiForgeryToken()
-        <div class="top-header">
+        <div class="top-header" id="user">
             <h5 class="text-logout">Xin chào : <span style="color:#ff0000"> @User.Identity.GetUserName() </span></h5>
             <i class="glyphicon glyphicon-user text-logout" style="padding-right:10px!important"></i>
+
         </div>
 
     }
@@ -22,6 +23,22 @@
             <label id="countItem"></label>
             <a href="/gio-hang" class="item cart" id="cart-hover" title="giỏ hàng"></a>
         </div>
+        @*@if (Request.IsAuthenticated)
+            {
+                @Html.AntiForgeryToken()
+                <div class="top-header" id="user">
+                    <h5 class="text-logout">Xin chào : <span style="color:#ff0000"> @User.Identity.GetUserName() </span></h5>
+                    <i class="glyphicon glyphicon-user text-logout" style="padding-right:10px!important"></i>
+
+                </div>
+            }*@
+        <div class="userBox">
+            <ul>
+                <li>Hồ sơ</li>
+                <li>Đơn hàng</li>
+                <li>Đăng xuất</li>
+            </ul>
+        </div>
         @using (Html.BeginForm("LogOut", "Account", FormMethod.Post, new { @id = "frmLogout" }))
         {
             if (Request.IsAuthenticated)
@@ -29,15 +46,14 @@
                 @Html.AntiForgeryToken()
                 <div class="text-login">
                     <a><i class="glyphicon glyphicon-log-out"></i></a>
-                    <a href="#" id="btnLogout">Đăng xuất</a>
+                    <a href="#" id="btnlogout">đăng xuất</a>
                 </div>
-
             }
             else
             {
                 <div class="text-login">
                     <a><i class="glyphicon glyphicon-user"></i></a>
-                    <a href="/dang-nhap-html" class="nut" id="login-hover">Đăng nhập</a>
+                    <a href="/dang-nhap-html" class="nut" id="login-hover">đăng nhập</a>
                 </div>
             }
         }

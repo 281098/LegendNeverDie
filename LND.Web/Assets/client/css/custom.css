@@ -791,4 +791,21 @@ banner_bottom_agile_info-h2t {
     height: 150px;
     border-color: aquamarine;
 }
+
+/*userBox*/
+.userBox {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: white;
+    overflow: hidden;
+    z-index: 10000;
+    display: none;
+}
+
+#user:hover + .userBox {
+    display: block;
+}
+
+
 /* menu scroll*/

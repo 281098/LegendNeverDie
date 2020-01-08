@@ -3,9 +3,8 @@
         //$('#logo-hover').addClass('rollIn animated');
         $('#menu-hover').addClass('lightSpeedIn animated');
         $('#cart-hover').addClass('bounceInDown animated');
-        $('.top-header').addClass('rotateInDownLeft animated');
+       // $('.top-header').addClass('rotateInDownLeft animated');
     });
-
     $(window).click(function (e) {
         //$('#logo-hover').removeClass('rollIn animated');
         $('#menu-hover').removeClass('lightSpeedIn animated');
@@ -26,7 +25,7 @@
             $('#menu-hover').addClass('menu-small zoomIn animated');
             $("#smallsearch").css({ "padding-right": "0px" });
             $("#smallsearch").addClass('flip animated');
-            $('.top-header').removeClass('rotateInDownLeft animated');
+           // $('.top-header').removeClass('rotateInDownLeft animated');
         }
         if (page1 < 270) {
           
@@ -38,7 +37,7 @@
         }
         if (page1 == 0) {
             $('#logo-hover').addClass('rollIn animated');
-            $('.top-header').addClass('rotateInDownLeft animated');
+           // $('.top-header').addClass('rotateInDownLeft animated');
         }
         if (page1 >= 700) {
             $('#myCarousel').removeClass('zoomIn animated');
